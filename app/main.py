@@ -1,6 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import re
+import pandas as pd
 
 def read_csv(path):
     with open(path) as filecsv:
@@ -23,6 +24,13 @@ def generate_bar_chart(labels, values, name):
     plt.close()
 
 
+def generate_pie_chart(labels, values):
+    fig, ax = plt.subplots()
+    ax.pie(values, labels=labels)
+    plt.savefig(f'./imgs/pie.png')
+    plt.close()
+
+
 def get_data_by_country(country, data):
     data = filter(lambda c: c['Country/Territory'] == country, data)
     return list(data)
@@ -40,6 +48,12 @@ def get_population(country):
 
 
 def run():
+    df = pd.read_csv('world_population.csv')
+    df = df[df['Continent'] == 'South America']
+    countries = df['Country/Territory'].values
+    percentages = df['World Population Percentage'].values
+    generate_pie_chart(countries, percentages)
+
     data = read_csv('world_population.csv')
     country = input('Type a Country => ')
 
