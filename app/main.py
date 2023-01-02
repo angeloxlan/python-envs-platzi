@@ -27,7 +27,7 @@ def generate_bar_chart(labels, values, name):
 def generate_pie_chart(labels, values):
     fig, ax = plt.subplots()
     ax.pie(values, labels=labels)
-    plt.savefig(f'./imgs/pie.png')
+    plt.savefig(f'./imgs/chart_pie_country.png')
     plt.close()
 
 
